@@ -1,0 +1,30 @@
+Generate Test Member Roster File 
+The purpose of this document is to outline the requirements for a tool to generate test member roster files for the purposes of load testing a system that consumes this file.  The tool should be able to take a parameter of the number of detail records to create.
+Member Roster File Format
+The member roster file consists of a header row, a number of details row, and a trailer row.
+Header Row
+The header row is static.  The value to use is below.
+HDR|10|111111111111111|0987654321|444444444444444|1|20131217|152957|MRL|T|F
+Details Row
+The details row contains 16 columns and has various rules such as being incremental, unique, random, or just a plain static value.  
+The table below has the columns from left to right in the row.
+Column Name	Value Rule(s)
+Record Type	Always “DTL”
+Record ID	Incremental Number, max 10 chars
+Unique Member ID	Unique alpha-numeric, max 10 chars
+Customer ID	Always “111111111111111”
+First Name	Random alpha, max 35 chars
+Middle Name	Random alpha, max 35 chars
+Last Name	Random alpha, max 35 chars
+Name Suffix	Random alpha, max 10 chars
+Date Of Birth	Any date in the ISO date format
+Gender Code	Either “M” or “F”
+
+Trailer Row
+The trailer row is the last line in the member roster file and contains the number of detail records generated.
+Column Name	Value Rule(s)
+Record Type	Always “TRL”
+Detail Records Count	The number of details records in the file
+
+Example row:
+TRL|10
