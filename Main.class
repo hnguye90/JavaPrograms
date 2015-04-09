@@ -1,0 +1,54 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
+public class Main {
+    public Main() {
+    }
+
+    public static void main(String[] args) {
+        String head = "HDR|10|111111111111111|0987654321|444444444444444|1|20131217|152957|MRL|T|F";
+        String tail = "TRL|";
+        int num_records = 0;
+        if(args.length > 0) {
+            try {
+                num_records = Integer.parseInt(args[0]);
+            } catch (NumberFormatException var5) {
+                System.err.println("Argument" + args[0] + " must be an integer.");
+                System.exit(1);
+            }
+        } else {
+            System.err.println("This program requires a number of arguments parameter passed.");
+            System.exit(1);
+        }
+
+        TestMemberDetailsGenerator gen = new TestMemberDetailsGenerator(num_records);
+        writeToFile("MemberRosterFile.txt", head + System.lineSeparator() + gen.getAllDetails() + tail + num_records);
+    }
+
+    public static void writeToFile(String filename, String content) {
+        BufferedWriter writer = null;
+
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), "utf-8"));
+            writer.write(content);
+        } catch (IOException var12) {
+            System.err.println("IO Exception occurred during write to file, exiting.");
+            System.exit(1);
+        } finally {
+            try {
+                writer.close();
+            } catch (Exception var11) {
+                ;
+            }
+
+        }
+
+    }
+}
